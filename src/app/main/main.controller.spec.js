@@ -3,7 +3,7 @@
 describe('controllers', function(){
   var scope;
 
-  beforeEach(module('nisUi'));
+  beforeEach(module('connecthealthApp'));
 
   beforeEach(inject(function($rootScope) {
     scope = $rootScope.$new();
