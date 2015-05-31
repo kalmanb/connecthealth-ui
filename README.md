@@ -11,9 +11,6 @@
 
 ### TODO
 
-* new ng router
-* es6
-* jade
 * search patients
 * firebase
 * treatment

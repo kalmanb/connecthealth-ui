@@ -1,0 +1,9 @@
+div(layout="vertical", layout-fill, ng-controller="MainCtrl")
+ md-content
+    header(ng-include="'app/components/navbar/navbar.html'")
+    .techs(layout-align="center")
+      md-card(ng-repeat="awesomeThing in awesomeThings | orderBy:'rank'")
+        .thumbnail
+            h3 {{awesomeThing.title}}
+            p {{awesomeThing.description}}
+    footer
