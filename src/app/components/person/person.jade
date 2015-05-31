@@ -1,11 +1,43 @@
-div(layout="row", ng-controller="PersonCtrl as pc")
+div.person(layout="row", ng-controller="PersonCtrl as pc")
 
-  md-sidenav.site-sidenav(md-sidenav-left, md-whiteframe-z2 md-component-id="left" md-is-locked-open="true")
+  md-sidenav.site-sidenav(md-sidenav-left, md-whiteframe-z2, md-component-id="left", md-is-locked-open="true")
      md-toolbar.md-whiteframe-z1(layout="row")
-       h1 Users {{pc.name}}
+       h1.md-padding Users
        
-   md-list
-       md-list-item(ng-repeat="it in pc.people")
-          md-button(ng-click="ul.selectUser(it)", ng-class="{'selected' : it === ul.selected }")
-            md-icon.avatar(md-svg-icon="{{it.avatar}}")
-            {{it.name}}
+     md-list
+       md-list-item(ng-repeat="person in pc.people")
+          md-button(ng-click="pc.selectPerson(person)", ng-class="{'selected' : person === pc.selected }")
+            //md-icon.avatar(md-svg-icon="{{person.avatar}}")
+            p {{person.name}}
+
+  div.md-whiteframe-z2(flex, layout="column", tabIndex="-1", role="main")
+
+    md-toolbar.md-whiteframe-z1(layout="row")
+      md-button.menu(hide-gt-sm, ng-click="ul.toggleList()", aria-label="Show User List")
+        //- md-icon(md-svg-icon="menu")
+      h1.md-padding Title
+
+    md-content#content.md-padding(flex)
+        h2 {{pc.selected.name}}
+        form(name="userForm")
+          md-input-container
+            label Date of Birth
+            input(type="text", ng-model="pc.selected.dob", aria-label="Date of Birth", md-maxlength="100")
+          md-input-container
+            label Mobile
+            input(type="text", ng-model="pc.selected.mobile", aria-label="Mobile", md-maxlength="12")
+          md-input-container
+            label Email
+            input(type="email", ng-model="pc.selected.email", aria-label="Email", md-maxlength="254")
+  
+          md-button.contact(md-no-ink, ng-click="pc.showContactOptions($event)", aria-label="Contact User")
+            md-tooltip Contact {{ pc.selected.name }}
+            //- md-icon(md-svg-icon="share")
+            span Share
+  
+            
+//
+  div.md-whiteframe-z2(flex-sm="100", flex-gt-sm="90", flex-gt-md="70", flex-gt-lg="50")
+    md-content.md-padding
+      
+    

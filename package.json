@@ -1,7 +1,9 @@
 {
   "name": "connecthealthApp",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-sass": "^2.0.1"
+  },
   "scripts": {
     "test": "gulp test"
   },

@@ -9,11 +9,14 @@ var wiredep = require('wiredep').stream;
 
 module.exports = function(options) {
   gulp.task('styles', function () {
+    var sassOptions = {
+      style: 'expanded'
+    };
 
     var injectFiles = gulp.src([
-      options.src + '/app/**/*.styl',
-      '!' + options.src + '/app/index.styl',
-      '!' + options.src + '/app/vendor.styl'
+      options.src + '/app/**/*.scss',
+      '!' + options.src + '/app/index.scss',
+      '!' + options.src + '/app/vendor.scss'
     ], { read: false });
 
     var injectOptions = {
@@ -26,12 +29,12 @@ module.exports = function(options) {
       addRootSlash: false
     };
 
-    var indexFilter = $.filter('index.styl');
-    var vendorFilter = $.filter('vendor.styl');
+    var indexFilter = $.filter('index.scss');
+    var vendorFilter = $.filter('vendor.scss');
 
     return gulp.src([
-      options.src + '/app/index.styl',
-      options.src + '/app/vendor.styl'
+      options.src + '/app/index.scss',
+      options.src + '/app/vendor.scss'
     ])
       .pipe(indexFilter)
       .pipe($.inject(injectFiles, injectOptions))
@@ -40,7 +43,7 @@ module.exports = function(options) {
       .pipe(wiredep(options.wiredep))
       .pipe(vendorFilter.restore())
       .pipe($.sourcemaps.init())
-      .pipe($.stylus()).on('error', options.errorHandler('Stylus'))
+      .pipe($.sass(sassOptions)).on('error', options.errorHandler('Sass'))
       .pipe($.autoprefixer()).on('error', options.errorHandler('Autoprefixer'))
       .pipe($.sourcemaps.write())
       .pipe(gulp.dest(options.tmp + '/serve/app/'))
