@@ -1,0 +1,11 @@
+div(layout="row", ng-controller="PersonCtrl as pc")
+
+  md-sidenav.site-sidenav(md-sidenav-left, md-whiteframe-z2 md-component-id="left" md-is-locked-open="true")
+     md-toolbar.md-whiteframe-z1(layout="row")
+       h1 Users {{pc.name}}
+       
+   md-list
+       md-list-item(ng-repeat="it in pc.people")
+          md-button(ng-click="ul.selectUser(it)", ng-class="{'selected' : it === ul.selected }")
+            md-icon.avatar(md-svg-icon="{{it.avatar}}")
+            {{it.name}}

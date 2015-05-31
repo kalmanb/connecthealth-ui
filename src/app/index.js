@@ -2,6 +2,7 @@
 
 import MainCtrl from '../app/components/main/main.controller';
 import NavbarCtrl from '../app/components/navbar/navbar.controller';
+import PersonCtrl from '../app/components/person/person.controller';
 
 
 function dashCase(str) {
@@ -9,7 +10,7 @@ function dashCase(str) {
         return '-' + $1.toLowerCase();
     });
 }
-function componentLoaderConfig($componentLoaderProvider) {
+function componentMapper($componentLoaderProvider) {
     // Load components from scr/app/components instead of ./components
     $componentLoaderProvider.setTemplateMapping(function (name) {
         var dashName = dashCase(name);
@@ -24,14 +25,16 @@ function componentLoaderConfig($componentLoaderProvider) {
 
 function AppCtrl($router) {
     $router.config([
-        { path: '/', component: 'main' },
+        { path: '/', redirectTo: '/person' },
+        { path: '/person', component: 'person' },
     ]);
 }
 
 angular.module('app', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ngNewRouter', 'ngMaterial' ])
   .controller('MainCtrl', MainCtrl)
   .controller('NavbarCtrl', NavbarCtrl)
+  .controller('PersonCtrl', PersonCtrl)
   .controller('AppCtrl', ['$router', AppCtrl])
-  .config(componentLoaderConfig);
+  .config(componentMapper);
 
 
